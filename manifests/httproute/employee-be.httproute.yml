@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: employee-be-httproute
+  namespace: backend
+spec:
+  parentRefs:
+    - name: app-gateway
+      namespace: default
+  hostnames:
+    - "employee-backend.local"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: employee-be-service
+          port: 3000

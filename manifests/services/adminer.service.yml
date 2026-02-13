@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-service
+  namespace: backend
+spec:
+  selector:
+    app: adminer
+  clusterIP: None
+  ports:
+    - port: 8080
+      name: adminer

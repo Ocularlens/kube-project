@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employee-fe-config
+  namespace: frontend
+data:
+  VITE_API_URL: "http://employee-backend.local/api/"

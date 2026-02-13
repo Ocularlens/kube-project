@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: employee-fe-httproute
+  namespace: frontend
+spec:
+  parentRefs:
+    - name: app-gateway
+      namespace: default
+  hostnames:
+    - "employee-frontend.local"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: employee-fe-service
+          port: 80

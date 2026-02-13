@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-be-service
+  namespace: backend
+spec:
+  selector:
+    app: employee-be
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

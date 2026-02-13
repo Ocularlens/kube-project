@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-be
+  namespace: backend
+  labels:
+    app: employee-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-be
+  template:
+    metadata:
+      labels:
+        app: employee-be
+    spec:
+      containers:
+        - name: employee-be
+          image: devops/employee-be:1.0.1
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: employee-be-config

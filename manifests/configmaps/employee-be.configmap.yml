@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employee-be-config
+  namespace: backend
+data:
+  DB_HOST: "mysql-service.backend.svc.cluster.local"
+  DB_PORT: "3306"
+  DB_PASSWORD: "1234"
+  DB_USER: "root"
+  DB_NAME: "coding_exam"
+  JWT_SECRET: "QWERTYUIOPASDFGHJKLZXCVBNM123456"
+  TOKEN_EXPIRATION: "1h"
+  FE_APP_URL: "*"
