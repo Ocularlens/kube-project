@@ -17,8 +17,29 @@ spec:
     spec:
       containers:
         - name: employee-be
-          image: devops/employee-be:1.0.1
-          imagePullPolicy: Never
+          image: devops/employee-be:1.0.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: instance-port
+              containerPort: 3000
           envFrom:
             - configMapRef:
                 name: employee-be-config
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: instance-port
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: instance-port
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: instance-port
+            initialDelaySeconds: 30
+            periodSeconds: 10

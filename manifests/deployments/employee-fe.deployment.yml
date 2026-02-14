@@ -17,8 +17,29 @@ spec:
     spec:
       containers:
         - name: employee-fe
-          image: devops/employee-fe:1.0.17
-          imagePullPolicy: Never
+          image: devops/employee-fe:1.0.18
+          imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
                 name: employee-fe-config
+          ports:
+            - containerPort: 80
+              name: web-port
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: web-port
+            initialDelaySeconds: 20
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: web-port
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: web-port
+            initialDelaySeconds: 3
+            periodSeconds: 3
