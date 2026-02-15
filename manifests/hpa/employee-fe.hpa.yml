@@ -1,0 +1,15 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: employee-fe-hpa
+  namespace: frontend
+  labels:
+    app: employee-fe
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: employee-fe
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 75
