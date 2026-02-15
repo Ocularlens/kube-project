@@ -6,7 +6,6 @@ metadata:
   labels:
     app: employee-be
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: employee-be
@@ -19,6 +18,13 @@ spec:
         - name: employee-be
           image: devops/employee-be:1.0.4
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           ports:
             - name: instance-port
               containerPort: 3000
@@ -29,17 +35,17 @@ spec:
             httpGet:
               path: /api/health
               port: instance-port
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            initialDelaySeconds: 5
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /api/health
               port: instance-port
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 10
           startupProbe:
             httpGet:
               path: /api/health
               port: instance-port
-            initialDelaySeconds: 30
+            initialDelaySeconds: 20
             periodSeconds: 10

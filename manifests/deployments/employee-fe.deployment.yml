@@ -6,7 +6,6 @@ metadata:
   labels:
     app: employee-fe
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: employee-fe
@@ -19,6 +18,13 @@ spec:
         - name: employee-fe
           image: devops/employee-fe:1.0.18
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           envFrom:
             - configMapRef:
                 name: employee-fe-config
