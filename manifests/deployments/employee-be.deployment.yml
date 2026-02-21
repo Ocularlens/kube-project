@@ -14,10 +14,17 @@ spec:
       labels:
         app: employee-be
     spec:
+      volumes:
+        - name: employee-be-pvc
+          persistentVolumeClaim:
+            claimName: employee-be-pvc
       containers:
         - name: employee-be
-          image: devops/employee-be:1.0.4
+          image: devops/employee-be:1.0.9
           imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: employee-be-pvc
+              mountPath: /var/lib/employee-be/tmp
           resources:
             limits:
               cpu: 250m

@@ -12,3 +12,4 @@ data:
   JWT_SECRET: "QWERTYUIOPASDFGHJKLZXCVBNM123456"
   TOKEN_EXPIRATION: "1h"
   FE_APP_URL: "*"
+  TEMP_DIR: /var/lib/employee-be/tmp
